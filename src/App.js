@@ -1,24 +1,28 @@
 import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
-import Todo from './Todo';
+// import Todo from './Todo';
 import Todos from './Todos';
 import NewTodo from './NewTodo';
 
 function App() {
+  
   const [todos, setTodos] = useState([
           {name:"Read a book", done:true,isdisplay:true},
           {name:"Write a blog",done:true,isdisplay:true},
           {name:"Make a video",done:false,isdisplay:true},
           {name:"Reply comments",done:true,isdisplay:true}
-  ])
+  ]);
+  const [tempTodos, setTempTodos] = useState(todos);
 
   const handleNewTodo = (todo)=>{
     if (!todo){
       return;
     }
     const newTodos = todos.concat([{name:todo,done:false,isdisplay:true}]);
-    setTodos(newTodos)
+    setTodos(newTodos);
+    const newTempTodos = tempTodos.concat([{name:todo,done:false,isdisplay:true}]);
+    setTempTodos(newTempTodos);
   }
 
   const toggleDone = (index)=>{
@@ -32,36 +36,42 @@ function App() {
     setTodos(newTodos)
   }
 
-  const totalRemaining = todos.filter((todo)=>{
-    return todo.done === false;
-  }).length;
-
-
-  const displayOption = () => {
-    // const newDisplayTodos = todos.filter((todo) => {
-    //   return todo.done === true;
-    // });
-    const newDisplayTodos = todos.map((todo) => {
-      if(todo.done){
-        return todo;
-      }else{
-        todo.isdisplay = false;
-        return todo;
-      }
-    });
-    setTodos(newDisplayTodos)
-  }
-
+  // const totalRemaining = todos.filter((todo)=>{
+  //   return todo.done === false;
+  // }).length;
 
   const deleteTodo = (index) => {
     const newTodos = todos.filter((todo,i) => {
       if(i != index){
         return todo
       }
-    })
-    setTodos(newTodos)
+    });
+    setTodos(newTodos);
   }
 
+  const displayAllTodos = ()=>{
+    const newTodos = tempTodos.map((todo)=>{
+      return todo;
+    });
+    setTodos(newTodos);
+    console.log(tempTodos)
+  }
+
+  const displayCompleted = () => {
+    const displayCompleted = tempTodos.filter((todo) => {
+      return todo.done === true;
+    });
+    setTodos(displayCompleted)
+    console.log(tempTodos)
+  }
+  
+  const displayUncompleted = () => {
+    const displayUncompleted = tempTodos.filter((todo) => {
+      return todo.done === false;
+    });
+    setTodos(displayUncompleted);
+    console.log(tempTodos)
+  }
 
   return (
     <div className="App">
@@ -70,11 +80,10 @@ function App() {
         <NewTodo onNewTodo={(todo) => handleNewTodo(todo)}/>
         <Todos todos={todos} onToggleDone={(i) => toggleDone(i)} onDeleteTodo={(i) => deleteTodo(i)}/>
         <br/>
-        <div className='todo-btn'>
-          <div>{totalRemaining} items left</div> 
-          <button>All</button>
-          <button onClick={displayOption}>Completed</button>
-          <button onClick={displayOption}>Uncompleted</button>
+        <div className='todo-option'>
+          <a href="#" onClick={displayAllTodos}>All</a>
+          <a href="#" onClick={displayCompleted}>Completed</a>
+          <a href="#" onClick={displayUncompleted}>Uncompleted</a>
         </div>
       </div>
     </div>
