@@ -8,10 +8,10 @@ import NewTodo from './NewTodo';
 function App() {
   
   const [todos, setTodos] = useState([
-          {name:"Read a book", done:true,isdisplay:true},
-          {name:"Write a blog",done:true,isdisplay:true},
-          {name:"Make a video",done:false,isdisplay:true},
-          {name:"Reply comments",done:true,isdisplay:true}
+          {name:"Shop for Easter dinner", done:true,isdisplay:true},
+          {name:"Walk my dog",done:true,isdisplay:true},
+          {name:"Read a new chapter before sleep",done:false,isdisplay:true},
+          {name:"Unload dishwasher",done:true,isdisplay:true}
   ]);
   const [tempTodos, setTempTodos] = useState(todos);
 
