@@ -1,14 +1,17 @@
 import "./Todo.css"
-function Todo({todo, onClick}){
+function Todo({todo, onClick,onDelete}){
     return (
         <li className="todo-item">
-            <input
-                className="todo-checkbox"
-                type="checkbox"
-                onClick={onClick}
-                checked={todo.done? 'checked':''}>
-            </input>
-            {todo.name}
+            <div>
+                <input
+                    className="todo-checkbox"
+                    type="checkbox"
+                    onClick={onClick}
+                    checked={todo.done? 'checked':''}>
+                </input>
+                {todo.name}
+            </div>
+            <button onClick={onDelete}>x</button>
         </li>
     );
 }

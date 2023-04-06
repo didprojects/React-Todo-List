@@ -4,21 +4,20 @@ import './App.css';
 import Todo from './Todo';
 import Todos from './Todos';
 import NewTodo from './NewTodo';
-import ControlBtns from './ControlBtns';
 
 function App() {
   const [todos, setTodos] = useState([
-          {name:"Read a book", done:true},
-          {name:"Write a blog",done:true},
-          {name:"Make a video",done:false},
-          {name:"Reply comments",done:true}
+          {name:"Read a book", done:true,isdisplay:true},
+          {name:"Write a blog",done:true,isdisplay:true},
+          {name:"Make a video",done:false,isdisplay:true},
+          {name:"Reply comments",done:true,isdisplay:true}
   ])
 
   const handleNewTodo = (todo)=>{
     if (!todo){
       return;
     }
-    const newTodos = todos.concat([{name:todo,done:false}]);
+    const newTodos = todos.concat([{name:todo,done:false,isdisplay:true}]);
     setTodos(newTodos)
   }
 
@@ -37,16 +36,45 @@ function App() {
     return todo.done === false;
   }).length;
 
+
+  const displayOption = () => {
+    // const newDisplayTodos = todos.filter((todo) => {
+    //   return todo.done === true;
+    // });
+    const newDisplayTodos = todos.map((todo) => {
+      if(todo.done){
+        return todo;
+      }else{
+        todo.isdisplay = false;
+        return todo;
+      }
+    });
+    setTodos(newDisplayTodos)
+  }
+
+
+  const deleteTodo = (index) => {
+    const newTodos = todos.filter((todo,i) => {
+      if(i != index){
+        return todo
+      }
+    })
+    setTodos(newTodos)
+  }
+
+
   return (
     <div className="App">
       <h1>My Todo List</h1>
       <div className='todo-content'>
         <NewTodo onNewTodo={(todo) => handleNewTodo(todo)}/>
-        <Todos todos={todos} onToggleDone={(i) => toggleDone(i)}/>
+        <Todos todos={todos} onToggleDone={(i) => toggleDone(i)} onDeleteTodo={(i) => deleteTodo(i)}/>
         <br/>
         <div className='todo-btn'>
           <div>{totalRemaining} items left</div> 
-          <ControlBtns/>
+          <button>All</button>
+          <button onClick={displayOption}>Completed</button>
+          <button onClick={displayOption}>Uncompleted</button>
         </div>
       </div>
     </div>

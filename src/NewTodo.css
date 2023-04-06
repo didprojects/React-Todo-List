@@ -1,5 +1,11 @@
+.new-todo{
+    border: 1.5px solid rgb(243, 201, 124);
+    display: flex;
+    justify-content: space-between;
+}
 .new-todo input{
-    width: 80%;
+    width: 90%;
+    float: left;
     height: 30px;
-    border: 1.5px solid black;
+    border: 1.5px solid white;
 }

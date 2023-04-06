@@ -1,8 +1,9 @@
 .todo-item{
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-bottom: 1px solid black;
     font-size: 13px;
-}
-
-.todo-checkbox{
-    color: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
 }

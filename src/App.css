@@ -38,12 +38,12 @@
 }
 
 .todo-content{
-  border: 1px solid black;
-  /* margin-top: 10px; */
-  width: 30%;
+  border: 2px solid rgb(241, 206, 141);
+  width: 35%;
   margin: 0 auto;
   padding: 10px 10px;
   text-align: left;
+  background-color: rgb(240, 220, 183);
 }
 .todo-btn{
   display: flex;
